@@ -40,6 +40,7 @@ Features
 * Supports patches to the source code for fine-grain customization
 * Supports deploy to local/remote machines
 * OS independent
+* d'oh
 
 
 Requirements
