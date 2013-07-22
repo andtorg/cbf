@@ -8,12 +8,16 @@ echo CTOOLS
 echo
 echo ctools-installer version $VER
 echo 
-echo "Author: Pedro Alves (webdetails)"
-echo Thanks to Analytical Labs for jenkins builds
-echo Copyright Webdetails 2011
+echo
+echo Derived from the installer created by Pedro Alves (Copyright Webdetails 2011)
+echo
+echo This version installs Ctools components previously downloaded in a
+echo convenient repository. The goal is to enhance the stability of built
+echo solutions, avoiding any backward compatibility issue   
+echo 
 echo
 echo 
-echo Changelog:
+echo Changelog (before fork):
 echo
 echo v1.44 - Added option -r to specify offline mode
 echo v1.43 - Added option -c to specify ctools list to download - Thanks to Tom
