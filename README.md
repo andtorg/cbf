@@ -27,6 +27,12 @@ security types, etc.), CBF is the right tool for you.
 CBF is an ant build file (build.xml). Check more extended documentation in
 http://cbf.webdetails.org
 
+##### Ctools-downloader
+
+A shell script that downloads stable components from a [jenkins](http://ci.analytical-labs.com)
+server and create a local filesystem repository for future deployment. 
+
+####Deprecated - to be amended
 
 Features
 --------
