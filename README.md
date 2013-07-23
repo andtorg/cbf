@@ -1,16 +1,20 @@
-CBF - Community Build Framework
+CBF + Ctools Installer 
 ===============================
 
 
-#####Modified by andtorg
-
-
-
-About --
+About
 -----
 
+This is a modified version of some scripts developed by Webdetails in 
+order to help deploying Pentaho BI server. Original versions can be
+forked from github at
+- [webdetails/cbf](https://github.com/webdetails/cbf)
+- [ctools-installer](https://github.com/pmalves/ctools-installer)
 
-Focused on a multi-project/ multi-environment scenario, the Community Build
+
+##### CBF - Community Build Framework
+
+This ant build file (build.xml) Focused on a multi-project/ multi-environment scenario, the Community Build
 Framework (CBF) is the way to setup and deploy Pentaho based applications.
 
 
