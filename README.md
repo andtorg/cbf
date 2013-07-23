@@ -9,7 +9,7 @@ This is a modified version of some scripts developed by Webdetails in
 order to help deploying Pentaho BI server. Original versions can be
 forked from github at
 - [webdetails/cbf](https://github.com/webdetails/cbf)
-- [ctools-installer](https://github.com/pmalves/ctools-installer)
+- [pmalves/ctools-installer](https://github.com/pmalves/ctools-installer)
 
 
 ##### CBF - Community Build Framework
