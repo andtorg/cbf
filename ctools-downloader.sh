@@ -18,9 +18,7 @@ downloadCDF(){
 	echo "downloading CDF..."
 	URL='http://ci.analytical-labs.com/job/Webdetails-CDF-release/lastSuccessfulBuild/artifact/bi-platform-v2-plugin/dist/*zip*/dist.zip'
 	wget -P $TEMP_DIR $URL
-	unzip $TEMP_DIR/dist.zip -d $TEMP_DIR/cdf-tmp #MODIFIXARE: NON FUNZIONA 
-	#rm -f .tmp/dist/marketplace.xml
-	#unzip .tmp/dist/dist.zip -d .tmp > /dev/null
+	unzip -j $TEMP_DIR/dist.zip "dist/pentaho-cdf-"$VERSION_DIR".zip" -d $BASE_DIR/$VERSION_DIR/cdf
 	echo "CDF downloaded!"
 }
 
