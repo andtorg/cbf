@@ -47,10 +47,20 @@ downloadCDA(){
 }
 
 
+downloadCGG (){
+	echo "downloading CGG..."
+	URL='http://ci.analytical-labs.com/job/Webdetails-CGG-release/lastSuccessfulBuild/artifact/*zip*/dist.zip'
+	wget -P $TEMP_DIR $URL
+	unzip -jo $TEMP_DIR/dist.zip "archive/cgg-pentaho/dist/cgg-"$VERSION_DIR".zip" -d $BASE_DIR/$VERSION_DIR/cgg
+	rm $TEMP_DIR/dist.zip
+	echo "CGG downloaded!"
+}
+
 downloadAll(){
 	downloadCDF;
 	downloadCDE;
 	downloadCDA;
+	downloadCGG;
 }
 
 if [ ! -d $BASE_DIR/$VERSION_DIR ]
