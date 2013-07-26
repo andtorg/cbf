@@ -36,10 +36,21 @@ downloadCDE(){
 	echo "CDE downloaded!"
 }
 
+downloadCDA(){
+	echo "downloading CDA..."	
+	URL='http://ci.analytical-labs.com/job/Webdetails-CDA-release/lastSuccessfulBuild/artifact/*zip*/archive.zip'	
+	wget -P $TEMP_DIR $URL
+	unzip -jo $TEMP_DIR/archive.zip "archive/cda-pentaho/dist/cda-"$VERSION_DIR".zip" -d $BASE_DIR/$VERSION_DIR/cda
+	unzip -jo $TEMP_DIR/archive.zip "archive/cda-pentaho/dist/cda-samples-"$VERSION_DIR".zip" -d $BASE_DIR/$VERSION_DIR/cda
+	rm $TEMP_DIR/archive.zip
+	echo "CDA downloaded!"
+}
+
 
 downloadAll(){
 	downloadCDF;
 	downloadCDE;
+	downloadCDA;
 }
 
 if [ ! -d $BASE_DIR/$VERSION_DIR ]
