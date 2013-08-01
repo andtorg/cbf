@@ -65,6 +65,15 @@ downloadCDC (){
 	echo "CDC downloaded!"
 }
 
+downloadCDB (){
+	echo "downloading CDB..."
+	URL='http://ci.analytical-labs.com/job/Webdetails-CDB-release/lastSuccessfulBuild/artifact/dist/*zip*/dist.zip'
+	wget -P $TEMP_DIR $URL
+	unzip -jo $TEMP_DIR/dist.zip "dist/cdb-"$VERSION_DIR".zip" -d $BASE_DIR/$VERSION_DIR/cdb
+	rm $TEMP_DIR/dist.zip
+	echo "CDB downloaded!"
+}
+
 
 downloadAll(){
 	downloadCDF;
@@ -72,6 +81,7 @@ downloadAll(){
 	downloadCDA;
 	downloadCGG;
 	downloadCDC;
+	downloadCDB;
 }
 
 if [ ! -d $BASE_DIR/$VERSION_DIR ]
