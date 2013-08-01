@@ -74,6 +74,14 @@ downloadCDB (){
 	echo "CDB downloaded!"
 }
 
+downloadCDV (){
+	echo "downloading CDV..."
+	URL='http://ci.analytical-labs.com/job/Webdetails-CDV-release/lastSuccessfulBuild/artifact/dist/*zip*/dist.zip'
+	wget -P $TEMP_DIR $URL
+	unzip -jo $TEMP_DIR/dist.zip "dist/cdv-"$VERSION_DIR".zip" -d $BASE_DIR/$VERSION_DIR/cdv
+	unzip -jo $TEMP_DIR/dist.zip "dist/cdv-samples-"$VERSION_DIR".zip" -d $BASE_DIR/$VERSION_DIR/cdv
+	echo "CDV downloaded!"
+}
 
 downloadAll(){
 	downloadCDF;
@@ -82,6 +90,7 @@ downloadAll(){
 	downloadCGG;
 	downloadCDC;
 	downloadCDB;
+	downloadCDV;
 }
 
 if [ ! -d $BASE_DIR/$VERSION_DIR ]
