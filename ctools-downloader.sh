@@ -56,11 +56,22 @@ downloadCGG (){
 	echo "CGG downloaded!"
 }
 
+downloadCDC (){
+	echo "downloading CDC..."
+	URL='http://ci.analytical-labs.com/job/Webdetails-CDC-release/lastSuccessfulBuild/artifact/dist/*zip*/dist.zip'
+	wget -P $TEMP_DIR $URL
+	unzip -jo $TEMP_DIR/dist.zip "dist/cdc-"$VERSION_DIR".zip" -d $BASE_DIR/$VERSION_DIR/cdc
+	rm $TEMP_DIR/dist.zip
+	echo "CDC downloaded!"
+}
+
+
 downloadAll(){
 	downloadCDF;
 	downloadCDE;
 	downloadCDA;
 	downloadCGG;
+	downloadCDC;
 }
 
 if [ ! -d $BASE_DIR/$VERSION_DIR ]
