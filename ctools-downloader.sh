@@ -30,16 +30,18 @@ SAIKU_ADHOC_DIR="saiku_adhoc"
 TEMP_DIR=$BASE_DIR/tmp
 
 VERSION_DIR="NUMBER"
-SAIKU_VER_DIR="NUMBER"
-SAIKU_ADHOC_VER_DIR="NUMBER"
+SAIKU_VERSION="NUMBER"
+# SAIKU_ADHOC_VER_DIR="NUMBER"
+
+(("$#")) || help
 
 while (("$#"))
 do
     case "$1" in
 	#--)	shift; break;;
 	-c) VERSION_DIR="$2"; shift;;
-	-s)	SAIKU_VER_DIR="$2"; shift;;
-	-p) SAIKU_ADHOC_VER_DIR="$2"; shift;;
+	-s)	SAIKU_VERSION="$2"; shift;;
+	-p) SAIKU_ADHOC_VERSION="$2"; shift;;
 	*|-h)	help ;;
     esac
     shift
@@ -118,22 +120,28 @@ downloadCDV (){
 	wget -P $TEMP_DIR $URL
 	unzip -jo $TEMP_DIR/dist.zip "dist/cdv-"$VERSION_DIR".zip" -d $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cdv
 	unzip -jo $TEMP_DIR/dist.zip "dist/cdv-samples-"$VERSION_DIR".zip" -d $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cdv
+	rm $TEMP_DIR/dist.zip
 	echo "CDV downloaded!"
 }
 
 
-
 downloadCtools(){
 	# download all ctools	
-		downloadCDF;
-		downloadCDE;
-		downloadCDA;
-		downloadCGG;
-		downloadCDC;
-		downloadCDB;
-		downloadCDV;
+	downloadCDF;
+	# downloadCDE;
+	# downloadCDA;
+	# downloadCGG;
+	# downloadCDC;
+	# downloadCDB;
+	# downloadCDV;
 }
 
+downloadSaiku (){
+	URL='http://analytical-labs.com/downloads/saiku-plugin-'$SAIKU_VERSION'.zip'
+	rm -f $BASE_DIR/$SAIKU_DIR/"saiku-plugin-"$SAIKU_VERSION".zip" #remove if already exists
+	wget -P $BASE_DIR/$SAIKU_DIR $URL
+	echo "Saiku downloaded!"
+}
 
 
 # create subfolders for addons  
@@ -163,5 +171,8 @@ if [[ $VERSION_DIR != "NUMBER" ]]; then
 	fi
 fi
 
+if [[ $SAIKU_VERSION != "NUMBER" ]]; then
+	downloadSaiku;
+fi
 
 
