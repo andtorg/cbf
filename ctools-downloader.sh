@@ -6,15 +6,51 @@ echo CHANGELOG:
 echo
 echo v0.1 still developing 
 
+help (){
+
+	echo 
+	echo "Usage: ctools-downloader.sh -c ctoolsVersion -s saikuVersion -p saikuAdhocVersion"
+	echo
+	echo "-c    Ctools version number (only stable) (eg: 13.06.05)"
+	echo "-s    Saiku plugin version number (eg: 2.4)"
+	echo "-p    Saiku Adhoc plugin version number"
+	echo "-h    This help screen"
+	echo
+	exit 1
+}
+
+
+
+
 BASE_DIR="pentaho-addons"
 CTOOLS_DIR="ctools"
+SAIKU_DIR="saiku"
+SAIKU_ADHOC_DIR="saiku_adhoc"
+
 TEMP_DIR=$BASE_DIR/tmp
 
-VERSION_DIR=$1
+VERSION_DIR="NUMBER"
+SAIKU_VER_DIR="NUMBER"
+SAIKU_ADHOC_VER_DIR="NUMBER"
+
+while (("$#"))
+do
+    case "$1" in
+	#--)	shift; break;;
+	-c) VERSION_DIR="$2"; shift;;
+	-s)	SAIKU_VER_DIR="$2"; shift;;
+	-p) SAIKU_ADHOC_VER_DIR="$2"; shift;;
+	*|-h)	help ;;
+    esac
+    shift
+done
+
 
 
 rm -rf $BASE_DIR/tmp
 mkdir $TEMP_DIR
+
+
 
 
 
@@ -85,29 +121,47 @@ downloadCDV (){
 	echo "CDV downloaded!"
 }
 
-downloadAll(){
-	downloadCDF;
-	downloadCDE;
-	downloadCDA;
-	downloadCGG;
-	downloadCDC;
-	downloadCDB;
-	downloadCDV;
+
+
+downloadCtools(){
+	# download all ctools	
+		downloadCDF;
+		downloadCDE;
+		downloadCDA;
+		downloadCGG;
+		downloadCDC;
+		downloadCDB;
+		downloadCDV;
 }
 
+
+
+# create subfolders for addons  
 if [ ! -d $BASE_DIR/$CTOOLS_DIR ]
 then
 	mkdir $BASE_DIR/$CTOOLS_DIR
 fi
 
-
-
-if [ ! -d $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR ]
+if [ ! -d $BASE_DIR/$SAIKU_DIR ]
 then
-	mkdir $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR
-	downloadAll;
-
-else 
-	echo 'The folder $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR already exists. There is nothing I can do!'
+	mkdir $BASE_DIR/$SAIKU_DIR
 fi
+
+if [ ! -d $BASE_DIR/$SAIKU_ADHOC_DIR ]
+then
+	mkdir $BASE_DIR/$SAIKU_ADHOC_DIR
+fi
+
+
+
+if [[ $VERSION_DIR != "NUMBER" ]]; then
+	if [[ ! -d $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR ]]; then
+		mkdir $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR
+		downloadCtools;
+	else 
+		echo "The folder" \"$BASE_DIR/$CTOOLS_DIR/$VERSION_DIR\" "already exists. There is nothing I can do!"	
+	fi
+fi
+
+
 
