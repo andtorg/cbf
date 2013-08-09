@@ -31,7 +31,7 @@ TEMP_DIR=$BASE_DIR/tmp
 
 VERSION_DIR="NUMBER"
 SAIKU_VERSION="NUMBER"
-# SAIKU_ADHOC_VER_DIR="NUMBER"
+SAIKU_ADHOC_VERSION="NUMBER"
 
 (("$#")) || help
 
@@ -128,21 +128,29 @@ downloadCDV (){
 downloadCtools(){
 	# download all ctools	
 	downloadCDF;
-	# downloadCDE;
-	# downloadCDA;
-	# downloadCGG;
-	# downloadCDC;
-	# downloadCDB;
-	# downloadCDV;
+	downloadCDE;
+	downloadCDA;
+	downloadCGG;
+	downloadCDC;
+	downloadCDB;
+	downloadCDV;
 }
 
 downloadSaiku (){
+	echo "downloading Saiku plugin..."
 	URL='http://analytical-labs.com/downloads/saiku-plugin-'$SAIKU_VERSION'.zip'
 	rm -f $BASE_DIR/$SAIKU_DIR/"saiku-plugin-"$SAIKU_VERSION".zip" #remove if already exists
 	wget -P $BASE_DIR/$SAIKU_DIR $URL
 	echo "Saiku downloaded!"
 }
 
+downloadSaikuAdhoc (){
+	echo "downloading Saiku-Adhoc plugin..."
+	URL='https://github.com/Mgiepz/saiku-reporting/raw/gh-pages/downloads/saiku-adhoc-plugin-'$SAIKU_ADHOC_VERSION'.zip'
+	rm -f $BASE_DIR/$SAIKU_ADHOC_DIR/"saiku-plugin-"$SAIKU_ADHOC_VERSION".zip" #remove if already exists
+	wget -P $BASE_DIR/$SAIKU_ADHOC_DIR $URL
+	echo "Saiku-Adhoc plugin downloaded!"
+}
 
 # create subfolders for addons  
 if [ ! -d $BASE_DIR/$CTOOLS_DIR ]
@@ -175,4 +183,7 @@ if [[ $SAIKU_VERSION != "NUMBER" ]]; then
 	downloadSaiku;
 fi
 
+if [[ $SAIKU_ADHOC_VERSION != "NUMBER" ]]; then
+	downloadSaikuAdhoc;
+fi
 
