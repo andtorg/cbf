@@ -4,7 +4,7 @@
 
 echo CHANGELOG:
 echo
-echo v0.1 still developing 
+echo v1.0 
 
 help (){
 
