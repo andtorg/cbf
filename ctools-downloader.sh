@@ -204,6 +204,42 @@ downloading() {
 	fi
 }
 
+
+
+
+# Define install functions
+setupSamples() {
+	if [ ! -d  $SOLUTION_DIR/plugin-samples ]
+	then
+		mkdir $SOLUTION_DIR/plugin-samples
+	fi
+	
+	if [ ! -f  $SOLUTION_DIR/plugin-samples/index.xml ]
+	then
+		echo '<index><visible>true</visible><name>Plugin Samples</name><description>Plugin Samples</description></index>' > $SOLUTION_DIR/plugin-samples/index.xml
+	fi		
+}
+
+installCDF (){
+	rm -rf $SOLUTION_DIR/system/pentaho-cdf
+
+	# Removing samples dir. First two are deprecated
+	rm -rf $SOLUTION_DIR/bi-developers/cdf-samples	
+	rm -rf $SOLUTION_DIR/plugin-samples/cdf-samples	
+	rm -rf $SOLUTION_DIR/plugin-samples/pentaho-cdf
+
+	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cdf/pentaho-cdf-$VERSION_DIR.zip -d $SOLUTION_DIR/system/ > /dev/null
+
+	setupSamples
+	#unzip .tmp/dist/pentaho-cdf-samples$FILESUFIX*zip  -d $SOLUTION_DIR/plugin-samples/ > /dev/null
+}
+
+
+
+
+
+
+
 if [[ $MODE = "download" ]]
 	then
 		downloading;
