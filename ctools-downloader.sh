@@ -5,12 +5,14 @@
 echo CHANGELOG:
 echo
 echo v1.0 
+echo
 
 help (){
 
 	echo 
 	echo "Usage: ctools-downloader.sh -c ctoolsVersion -s saikuVersion -p saikuAdhocVersion"
 	echo
+	echo "-m    Mode to be set either for download or install"
 	echo "-c    Ctools version number (only stable) (eg: 13.06.05)"
 	echo "-s    Saiku plugin version number (eg: 2.4)"
 	echo "-p    Saiku Adhoc plugin version number"
@@ -19,7 +21,9 @@ help (){
 	exit 1
 }
 
-
+# variables for colors
+red=$(tput setaf 1)
+reset=$(tput sgr0)
 
 
 BASE_DIR="pentaho-addons"
@@ -33,12 +37,15 @@ VERSION_DIR="NUMBER"
 SAIKU_VERSION="NUMBER"
 SAIKU_ADHOC_VERSION="NUMBER"
 
+MODE="TO-SET"
+
 (("$#")) || help
 
 while (("$#"))
 do
     case "$1" in
 	#--)	shift; break;;
+	-m) MODE="$2"; shift;;
 	-c) VERSION_DIR="$2"; shift;;
 	-s)	SAIKU_VERSION="$2"; shift;;
 	-p) SAIKU_ADHOC_VERSION="$2"; shift;;
@@ -47,10 +54,16 @@ do
     shift
 done
 
+if [[ $MODE != install && $MODE != download ]]; then
+	
+	echo $red"Mode not set; use either \"-m download\" or \"-m install\"" $reset
+	exit 1
+fi
 
 
-rm -rf $BASE_DIR/tmp
-mkdir $TEMP_DIR
+
+# rm -rf $TEMP_DIR
+# mkdir $TEMP_DIR
 
 
 
@@ -152,38 +165,49 @@ downloadSaikuAdhoc (){
 	echo "Saiku-Adhoc plugin downloaded!"
 }
 
-# create subfolders for addons  
-if [ ! -d $BASE_DIR/$CTOOLS_DIR ]
-then
-	mkdir $BASE_DIR/$CTOOLS_DIR
-fi
+# for download mode
+downloading() { 
 
-if [ ! -d $BASE_DIR/$SAIKU_DIR ]
-then
-	mkdir $BASE_DIR/$SAIKU_DIR
-fi
-
-if [ ! -d $BASE_DIR/$SAIKU_ADHOC_DIR ]
-then
-	mkdir $BASE_DIR/$SAIKU_ADHOC_DIR
-fi
-
-
-
-if [[ $VERSION_DIR != "NUMBER" ]]; then
-	if [[ ! -d $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR ]]; then
-		mkdir $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR
-		downloadCtools;
-	else 
-		echo "The folder" \"$BASE_DIR/$CTOOLS_DIR/$VERSION_DIR\" "already exists. There is nothing I can do!"	
+	# create subfolders for addons  
+	if [ ! -d $BASE_DIR/$CTOOLS_DIR ]
+	then
+		mkdir $BASE_DIR/$CTOOLS_DIR
 	fi
-fi
 
-if [[ $SAIKU_VERSION != "NUMBER" ]]; then
-	downloadSaiku;
-fi
+	if [ ! -d $BASE_DIR/$SAIKU_DIR ]
+	then
+		mkdir $BASE_DIR/$SAIKU_DIR
+	fi
 
-if [[ $SAIKU_ADHOC_VERSION != "NUMBER" ]]; then
-	downloadSaikuAdhoc;
+	if [ ! -d $BASE_DIR/$SAIKU_ADHOC_DIR ]
+	then
+		mkdir $BASE_DIR/$SAIKU_ADHOC_DIR
+	fi
+
+
+
+	if [[ $VERSION_DIR != "NUMBER" ]]; then
+		if [[ ! -d $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR ]]; then
+			mkdir $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR
+			downloadCtools;
+		else 
+			echo "The folder" \"$BASE_DIR/$CTOOLS_DIR/$VERSION_DIR\" "already exists. There is nothing I can do!"	
+		fi
+	fi
+
+	if [[ $SAIKU_VERSION != "NUMBER" ]]; then
+		downloadSaiku;
+	fi
+
+	if [[ $SAIKU_ADHOC_VERSION != "NUMBER" ]]; then
+		downloadSaikuAdhoc;
+	fi
+}
+
+if [[ $MODE = "download" ]]
+	then
+		downloading;
+	else
+		echo $red"this should install something"$reset
 fi
 
