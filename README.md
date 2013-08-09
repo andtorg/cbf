@@ -32,7 +32,9 @@ http://cbf.webdetails.org
 A shell script that downloads stable components from the Internet and create a local filesystem
 repository for future deployment.
 
-At prompt, launch 	./ctools-downloader.sh to see the options for downloading.
+At prompt, launch
+    ./ctools-downloader.sh
+to see the options for downloading.
 
 
 ##### Ctools-installer
