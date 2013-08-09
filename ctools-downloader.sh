@@ -21,6 +21,16 @@ help (){
 	exit 1
 }
 
+coloredPrint (){
+	local red=$(tput setaf 1) green=$(tput setaf 2) reset=$(tput sgr0)
+	if [[ $1 == msg ]]; then
+			echo $green$2$reset
+		elif [[ $1 == alert ]]; then
+			echo $red$2$reset
+		else echo "L'argomento può essere solo msg o alert" 
+	fi
+}
+
 # variables for colors
 red=$(tput setaf 1)
 green=$(tput setaf 2)
@@ -225,7 +235,7 @@ setupSamples() {
 }
 
 installCDF (){
-	echo $green"Installing CDF..."$reset
+	coloredPrint msg "Installing CDF..."
 	rm -rf $SOLUTION_DIR/system/pentaho-cdf
 
 	# Removing samples dir. First two are deprecated
@@ -237,7 +247,7 @@ installCDF (){
 
 	setupSamples
 	#unzip .tmp/dist/pentaho-cdf-samples$FILESUFIX*zip  -d $SOLUTION_DIR/plugin-samples/ > /dev/null
-	echo $green"CDF Installed!"$reset
+	coloredPrint msg "CDF Installed!"
 }
 
 
