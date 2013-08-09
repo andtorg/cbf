@@ -23,6 +23,7 @@ help (){
 
 # variables for colors
 red=$(tput setaf 1)
+green=$(tput setaf 2)
 reset=$(tput sgr0)
 
 
@@ -37,6 +38,8 @@ VERSION_DIR="NUMBER"
 SAIKU_VERSION="NUMBER"
 SAIKU_ADHOC_VERSION="NUMBER"
 
+SOLUTION_DIR='PATH'	
+
 MODE="TO-SET"
 
 (("$#")) || help
@@ -49,6 +52,7 @@ do
 	-c) VERSION_DIR="$2"; shift;;
 	-s)	SAIKU_VERSION="$2"; shift;;
 	-p) SAIKU_ADHOC_VERSION="$2"; shift;;
+	-l) SOLUTION_DIR="$2"; shift;;
 	*|-h)	help ;;
     esac
     shift
@@ -221,6 +225,7 @@ setupSamples() {
 }
 
 installCDF (){
+	echo $green"Installing CDF..."$reset
 	rm -rf $SOLUTION_DIR/system/pentaho-cdf
 
 	# Removing samples dir. First two are deprecated
@@ -232,18 +237,22 @@ installCDF (){
 
 	setupSamples
 	#unzip .tmp/dist/pentaho-cdf-samples$FILESUFIX*zip  -d $SOLUTION_DIR/plugin-samples/ > /dev/null
+	echo $green"CDF Installed!"$reset
 }
 
 
 
 
-
+# for install mode
+installing (){
+	installCDF;
+}
 
 
 if [[ $MODE = "download" ]]
 	then
 		downloading;
 	else
-		echo $red"this should install something"$reset
+		installing;
 fi
 
