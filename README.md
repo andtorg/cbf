@@ -29,8 +29,13 @@ http://cbf.webdetails.org
 
 ##### Ctools-downloader
 
-A shell script that downloads stable components from a [jenkins](http://ci.analytical-labs.com)
-server and create a local filesystem repository for future deployment. 
+A shell script that downloads stable components from the Internet and create a local filesystem
+repository for future deployment.
+
+At prompt, launch 	./ctools-downloader.sh to see the options for downloading.
+
+
+##### Ctools-installer
 
 ####Deprecated - to be amended
 
