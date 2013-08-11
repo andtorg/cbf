@@ -235,11 +235,11 @@ setupSamples() {
 installCDF (){
 	coloredPrint green "Installing CDF..."
 	rm -rf $SOLUTION_DIR/system/pentaho-cdf
-
 	# Removing samples dir. First two are deprecated
 	rm -rf $SOLUTION_DIR/bi-developers/cdf-samples	
 	rm -rf $SOLUTION_DIR/plugin-samples/cdf-samples	
 	rm -rf $SOLUTION_DIR/plugin-samples/pentaho-cdf
+	
 	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cdf/pentaho-cdf-$VERSION_DIR.zip -d $SOLUTION_DIR/system/ > /dev/null
 	setupSamples
 	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cdf/pentaho-cdf-samples-$VERSION_DIR.zip -d $SOLUTION_DIR/plugin-samples/ > /dev/null
@@ -250,21 +250,35 @@ installCDF (){
 installCDE (){
 	coloredPrint green "Installing CDE..."
 	rm -rf $SOLUTION_DIR/system/pentaho-cdf-dd
-
 	# Removing samples dir. First two are deprecated
 	rm -rf $SOLUTION_DIR/cde_sample
 	rm -rf $SOLUTION_DIR/plugin-samples/cde_sample
 	rm -rf $SOLUTION_DIR/plugin-samples/pentaho-cdf-dd
+	
 	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cde/pentaho-cdf-dd-$VERSION_DIR.zip -d $SOLUTION_DIR/system/ > /dev/null
 	setupSamples
 	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cde/pentaho-cdf-dd-solution-$VERSION_DIR.zip -d $SOLUTION_DIR/plugin-samples/ > /dev/null
 	coloredPrint green "CDE Installed!"
 }
 
+installCDA (){
+	coloredPrint green "Installing CDA..."
+	rm -rf $SOLUTION_DIR/system/cda
+	# Removing samples dir. First is deprecated
+	rm -rf $SOLUTION_DIR/bi-developers/cda
+	rm -rf $SOLUTION_DIR/plugin-samples/cda
+		
+	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cda/cda-$VERSION_DIR.zip -d $SOLUTION_DIR/system/ > /dev/null			
+	setupSamples	
+	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cda/cda-samples-$VERSION_DIR.zip -d $SOLUTION_DIR/plugin-samples/ > /dev/null
+	coloredPrint green "CDA Installed!" 
+}
+
 # for install mode
 installing (){
-	installCDF;
-	installCDE;
+	# installCDF;
+	# installCDE;
+	installCDA;
 }
 
 
