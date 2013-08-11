@@ -297,12 +297,28 @@ installCGG (){
 	fi
 }
 
+installCDC (){
+	coloredPrint green "Installing CDC..."
+	rm -rf $SOLUTION_DIR/system/cdc
+	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cdc/cdc-$VERSION_DIR.zip -d $SOLUTION_DIR/system/ > /dev/null			
+
+	# Changes to the server; 
+	# 1 - copy hazelcast to WEB-INF/lib
+	LIB_DIR=$WEBAPP_PATH/WEB-INF/lib
+	CDC_HAZELCAST_DIR=$SOLUTION_DIR/system/cdc/pentaho-lib
+	rm -rf $LIB_DIR/hazelcast-*.jar		
+	rm -rf $LIB_DIR/cdc-hazelcast-*.jar		
+	cp $CDC_HAZELCAST_DIR/*.jar  $LIB_DIR
+	coloredPrint green "CDC Installed!" 
+}
+
 # for install mode
 installing (){
 	# installCDF;
 	# installCDE;
 	# installCDA;
-	installCGG;
+	# installCGG;
+	installCDC;
 }
 
 
