@@ -312,13 +312,21 @@ installCDC (){
 	coloredPrint green "CDC Installed!" 
 }
 
+installCDB (){
+	coloredPrint green "Installing CDB..."
+	rm -rf $SOLUTION_DIR/system/cdb
+	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cdb/cdb-$VERSION_DIR.zip -d $SOLUTION_DIR/system/ > /dev/null			
+	coloredPrint green "CDB Installed!" 	
+}
+
 # for install mode
 installing (){
 	# installCDF;
 	# installCDE;
 	# installCDA;
 	# installCGG;
-	installCDC;
+	# installCDC;
+	installCDB;
 }
 
 
