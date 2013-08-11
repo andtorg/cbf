@@ -10,13 +10,14 @@ echo
 help (){
 
 	echo 
-	echo "Usage: ctools-downloader.sh -c ctoolsVersion -s saikuVersion -p saikuAdhocVersion"
+	echo "Usage: ctools-downloader.sh -m mode -c ctoolsVersion -s saikuVersion -p saikuAdhocVersion"
 	echo
-	echo "-m    Mode to be set either for download or install"
-	echo "-c    Ctools version number (only stable) (eg: 13.06.05)"
-	echo "-s    Saiku plugin version number (eg: 2.4)"
-	echo "-p    Saiku Adhoc plugin version number"
-	echo "-h    This help screen"
+	echo "-m    mode to be set either as \"download\" or \"install\""
+	echo "-c    ctools version number (only stable) (eg: 13.06.05)"
+	echo "-s    saiku plugin version number (eg: 2.4)"
+	echo "-p    saiku Adhoc plugin version number"
+	echo "-l    pentaho solution path"
+	echo "-h    this help screen"
 	echo
 	exit 1
 }
@@ -239,20 +240,31 @@ installCDF (){
 	rm -rf $SOLUTION_DIR/bi-developers/cdf-samples	
 	rm -rf $SOLUTION_DIR/plugin-samples/cdf-samples	
 	rm -rf $SOLUTION_DIR/plugin-samples/pentaho-cdf
-
 	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cdf/pentaho-cdf-$VERSION_DIR.zip -d $SOLUTION_DIR/system/ > /dev/null
-
 	setupSamples
-	#unzip .tmp/dist/pentaho-cdf-samples$FILESUFIX*zip  -d $SOLUTION_DIR/plugin-samples/ > /dev/null
+	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cdf/pentaho-cdf-samples-$VERSION_DIR.zip -d $SOLUTION_DIR/plugin-samples/ > /dev/null
 	coloredPrint green "CDF Installed!"
 }
 
 
+installCDE (){
+	coloredPrint green "Installing CDE..."
+	rm -rf $SOLUTION_DIR/system/pentaho-cdf-dd
 
+	# Removing samples dir. First two are deprecated
+	rm -rf $SOLUTION_DIR/cde_sample
+	rm -rf $SOLUTION_DIR/plugin-samples/cde_sample
+	rm -rf $SOLUTION_DIR/plugin-samples/pentaho-cdf-dd
+	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cde/pentaho-cdf-dd-$VERSION_DIR.zip -d $SOLUTION_DIR/system/ > /dev/null
+	setupSamples
+	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cde/pentaho-cdf-dd-solution-$VERSION_DIR.zip -d $SOLUTION_DIR/plugin-samples/ > /dev/null
+	coloredPrint green "CDE Installed!"
+}
 
 # for install mode
 installing (){
 	installCDF;
+	installCDE;
 }
 
 
