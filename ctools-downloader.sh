@@ -10,13 +10,14 @@ echo
 help (){
 
 	echo 
-	echo "Usage: ctools-downloader.sh -m mode -c ctoolsVersion -s saikuVersion -p saikuAdhocVersion"
+	echo "Usage: ctools-downloader.sh -m mode -c ctoolsVersion -s saikuVersion -p saikuAdhocVersion -l pentahoSolutionPath -w pentahoWebappPath"
 	echo
 	echo "-m    mode to be set either as \"download\" or \"install\""
 	echo "-c    ctools version number (only stable) (eg: 13.06.05)"
 	echo "-s    saiku plugin version number (eg: 2.4)"
 	echo "-p    saiku Adhoc plugin version number"
 	echo "-l    pentaho solution path"
+	echo "-w    pentaho webapp server path (required for cgg on versions before 4.5. eg: /biserver-ce/tomcat/webapps/pentaho)"
 	echo "-h    this help screen"
 	echo
 	exit 1
@@ -47,6 +48,8 @@ SAIKU_VERSION="NUMBER"
 SAIKU_ADHOC_VERSION="NUMBER"
 
 SOLUTION_DIR='PATH'	
+WEBAPP_PATH='PATH'
+
 
 MODE="TO-SET"
 
@@ -61,6 +64,7 @@ do
 	-s)	SAIKU_VERSION="$2"; shift;;
 	-p) SAIKU_ADHOC_VERSION="$2"; shift;;
 	-l) SOLUTION_DIR="$2"; shift;;
+	-w) WEBAPP_PATH="$2"; shift;;
 	*|-h)	help ;;
     esac
     shift
@@ -274,11 +278,31 @@ installCDA (){
 	coloredPrint green "CDA Installed!" 
 }
 
+installCGG (){
+	coloredPrint green "Installing CGG..."
+	rm -rf $SOLUTION_DIR/system/cgg
+	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cgg/cgg-$VERSION_DIR.zip -d $SOLUTION_DIR/system/ > /dev/null			
+	
+	# Changes to the server; 1 - delete batik; 2 - copy new one plus xml and fop
+	if [[ $WEBAPP_PATH != 'PATH' ]]
+	then
+		LIB_DIR=$WEBAPP_PATH/WEB-INF/lib
+		CGG_DIR=$SOLUTION_DIR/system/cgg/lib
+		rm -rf $LIB_DIR/batik-* $LIB_DIR/xml-apis* $LIB_DIR/xmlgraphics*
+		cp $CGG_DIR/batik-[^j]* $CGG_DIR/xml* $LIB_DIR
+		coloredPrint green "CGG Installed!" 
+	else
+		echo
+		echo coloredPrint red ' [CGG] No webapp path provided, if you are using pentaho older than 4.5 cgg will not work properly)'
+	fi
+}
+
 # for install mode
 installing (){
 	# installCDF;
 	# installCDE;
-	installCDA;
+	# installCDA;
+	installCGG;
 }
 
 
