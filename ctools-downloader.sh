@@ -319,14 +319,25 @@ installCDB (){
 	coloredPrint green "CDB Installed!" 	
 }
 
+installCDV (){
+	coloredPrint green "Installing CDV..."
+	rm -rf $SOLUTION_DIR/system/cdv
+	rm -rf $SOLUTION_DIR/plugin-samples/cdv
+	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cdv/cdv-$VERSION_DIR.zip -d $SOLUTION_DIR/system/ > /dev/null			
+	setupSamples
+	unzip $BASE_DIR/$CTOOLS_DIR/$VERSION_DIR/cdv/cdv-samples-$VERSION_DIR.zip -d $SOLUTION_DIR/plugin-samples/ > /dev/null
+	coloredPrint green "CDV Installed!" 	
+}
+
 # for install mode
 installing (){
-	# installCDF;
-	# installCDE;
-	# installCDA;
-	# installCGG;
-	# installCDC;
+	installCDF;
+	installCDE;
+	installCDA;
+	installCGG;
+	installCDC;
 	installCDB;
+	installCDV;
 }
 
 
@@ -337,3 +348,4 @@ if [[ $MODE = "download" ]]
 		installing;
 fi
 
+exit 0
