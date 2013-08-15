@@ -27,8 +27,10 @@ issues arising from using more recent version.
 
 Both the script and the folder pentaho-addons/ should stay under cbf main folder.
 
-At prompt, launch `./ctools-installer2.sh` to see all the options.
+In install mode, the script can be invoked during build process, setting the related properties that cbf ant file
+will read.
 
+At prompt, launch `./ctools-installer2.sh` to see all the options.
 
 
 
