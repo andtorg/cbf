@@ -1,10 +1,12 @@
 #!/bin/bash
 
-#NB create setupsamples during install
+#	Modified script based on Ctools-installer.sh developed by Webdetails
+#+  It works both in mode downloading and installing, accordind to the 
+#+  argument passed after "-m" 
 
 echo CHANGELOG:
 echo
-echo v1.0 
+echo "v1.0 first stable version"
 echo
 
 help (){
@@ -24,8 +26,8 @@ help (){
 }
 
 coloredPrint (){
-	# Print a message in a specific color to standard output
-	# Usage: coloredPrint color message
+	#    Print a message in a specific color to standard output
+	#+   Usage: coloredPrint color message
 	local red=$(tput setaf 1) green=$(tput setaf 2) reset=$(tput sgr0)
 	case "$1" in
 		green) echo $green$2$reset;;
