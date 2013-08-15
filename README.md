@@ -32,7 +32,7 @@ will read.
 
 At prompt, launch `./ctools-installer2.sh` to see all the options.
 
-42
+
 
 
 ##### CBF - Community Build Framework
