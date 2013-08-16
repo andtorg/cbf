@@ -13,7 +13,8 @@ forked from github at
 
 
 
-##### Ctools-installer2
+Ctools-installer2.sh
+-
 
 A bash script that works both in mode downloads and install, according to the value of the parameter -m
 passed on the command line.
@@ -33,8 +34,8 @@ will read.
 At prompt, launch `./ctools-installer2.sh` to see all the options.
   
   
-  
-##### CBF - Community Build Framework  (from original project)
+CBF - Community Build Framework  (from original project)
+-
 
 This ant build file (build.xml) Focused on a multi-project/ multi-environment scenario, the Community Build
 Framework (CBF) is the way to setup and deploy Pentaho based applications.
@@ -53,8 +54,7 @@ http://cbf.webdetails.org
 ctools setup)
 
 
-Features
---------
+####Features
 
  Focused on a multi-project/ multi-environment scenario, here are the main characteristics:
 
@@ -71,8 +71,7 @@ Features
 * OS independent
 
 
-Requirements
-------------
+####Requirements
 
 We will need:
 * A shell (if on windows, cygwin or equivalent is required)
@@ -83,7 +82,7 @@ We will need:
 * Svn client
 * RSync / ssh to do remote deploy
 
-License
--------
+####License
+
 
 CBF is licensed under the [MPLv2](http://www.mozilla.org/MPL/2.0/) license.
