@@ -331,15 +331,23 @@ installCDV (){
 	coloredPrint green "CDV Installed!" 	
 }
 
+installSaiku (){
+	coloredPrint green "Installing Saiku..."
+	rm -rf $SOLUTION_DIR/system/saiku
+	unzip $BASE_DIR/$SAIKU_DIR/saiku-plugin-$SAIKU_VERSION.zip -d $SOLUTION_DIR/system/ > /dev/null
+	coloredPrint green "Saiku Installed!" 
+}
+
 # for install mode
 installing (){
-	installCDF;
-	installCDE;
-	installCDA;
-	installCGG;
-	installCDC;
-	installCDB;
-	installCDV;
+	# installCDF;
+	# installCDE;
+	# installCDA;
+	# installCGG;
+	# installCDC;
+	# installCDB;
+	# installCDV;
+	installSaiku;
 }
 
 
