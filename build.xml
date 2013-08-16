@@ -448,7 +448,7 @@
 	</target>
 
 
-	<target name="all" description="Compiles and builds the entire project" depends="copy-finish,-ctools-installer-auto" />
+	<target name="all" description="Compiles and builds the entire project" depends="copy-finish,ctools-installer2" />
 
 
 	<!-- Clean targets -->
@@ -512,31 +512,24 @@
 	</target>
 
 
-	<target name="-ctools-installer-auto" description="Install ctools silently" depends="dev-setup-common" if="install.ctools">
+	<target name="ctools-installer2" description="Install ctools silently" depends="dev-setup-common" if="install.ctools">
 		<exec executable="/bin/bash" failonerror="true">
-			<arg value = "ctools-installer.sh" />
-			<arg value = "-s" />
+			<arg value = "ctools-installer2.sh" />
+			<arg value = "-m"/>
+			<arg value = "install"/>
+			<arg value = "-l" />
 			<arg value = "${solution.path}" />
 			<arg value = "-w" />
 			<arg value = "${pentaho.proj.dir}/${target-dist}/server/webapps/pentaho"/>
-			<arg value = "-b"/>
-			<arg value = "${ctools.branch}"/>
-			<arg value = "-y"/>
+			<arg value = "-c"/>
+			<arg value = "${ctools.version}"/>
+			<arg value = "-s" />
+			<arg value = "${saiku.version}"/>
+			<arg value = "-p"/>
+			<arg value = "${saiku-adhoc.version}"/>
 		</exec>
 	</target>
 
-	<target name="ctools-installer" description="Install ctools (prompts for modules)" depends="dev-setup-common">
-		<exec executable="/bin/bash" failonerror="true">
-			<arg value = "ctools-installer.sh" />
-			<arg value = "-n" />
-			<arg value = "-s" />
-			<arg value = "${solution.path}" />
-			<arg value = "-w" />
-			<arg value = "${pentaho.proj.dir}/${target-dist}/server/webapps/pentaho"/>
-			<arg value = "-b"/>
-			<arg value = "${ctools.branch}"/>
-		</exec>
-	</target>
 
 
 	<!-- Deploy targets -->
