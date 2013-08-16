@@ -31,12 +31,10 @@ In install mode, the script can be invoked during build process, setting the rel
 will read.
 
 At prompt, launch `./ctools-installer2.sh` to see all the options.
-
-
-
-
-
-##### CBF - Community Build Framework
+  
+  
+  
+##### CBF - Community Build Framework  (from original project)
 
 This ant build file (build.xml) Focused on a multi-project/ multi-environment scenario, the Community Build
 Framework (CBF) is the way to setup and deploy Pentaho based applications.
@@ -51,12 +49,9 @@ security types, etc.), CBF is the right tool for you.
 CBF is an ant build file (build.xml). Check more extended documentation in
 http://cbf.webdetails.org
 
+(Note: the enhanced CBF ant build file has just a few tweaks, compared to the original, in the target related to 
+ctools setup)
 
-
-
-
-
-####Deprecated - to be amended
 
 Features
 --------
