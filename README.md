@@ -1,4 +1,4 @@
-CBF + Ctools Installer 
+Enhanced CBF
 ===============================
 
 
