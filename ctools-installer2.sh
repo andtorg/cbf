@@ -338,16 +338,24 @@ installSaiku (){
 	coloredPrint green "Saiku Installed!" 
 }
 
+installSaikuAdhoc (){
+	coloredPrint green "Installing Saiku-Adhoc Reporting..."
+	rm -rf $SOLUTION_DIR/system/saiku-adhoc
+	unzip $BASE_DIR/$SAIKU_ADHOC_DIR/saiku-adhoc-plugin-$SAIKU_ADHOC_VERSION.zip -d $SOLUTION_DIR/system/ > /dev/null
+	coloredPrint green "Saiku-Adhoc Reporting Installed!" 
+}
+
 # for install mode
 installing (){
-	# installCDF;
-	# installCDE;
-	# installCDA;
-	# installCGG;
-	# installCDC;
-	# installCDB;
-	# installCDV;
+	installCDF;
+	installCDE;
+	installCDA;
+	installCGG;
+	installCDC;
+	installCDB;
+	installCDV;
 	installSaiku;
+	installSaikuAdhoc;
 }
 
 
